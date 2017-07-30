@@ -13,5 +13,4 @@ export const store = createStore(
   )
 )
 
-// begin periodically persisting the store
 persistStore(store)

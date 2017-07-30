@@ -5,8 +5,8 @@ import posts from './posts'
 import edit from './edit'
 
 export default combineReducers({
-	personal,
-	posts,
-	edit,
+  personal,
+  posts,
+  edit,
   routing: routerReducer
 })

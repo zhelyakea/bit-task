@@ -4,12 +4,12 @@ import { bindActionCreators } from 'redux'
 import styles from './Global.css';
 
 export default class Root extends Component {
-	render() {
+  render() {
     const { children } = this.props
-		return (
-			<div className={styles.wh_100}>
-				{children}
-			</div>
-		)
-	}
+    return (
+      <div className={styles.wh_100}>
+      {children}
+      </div>
+    )
+  }
 }

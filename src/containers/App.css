@@ -21,15 +21,15 @@
   background: white;
 }
 .search_input{
-	outline: none;
-	text-decoration:none;
-	border: 0px solid transparent;
+  outline: none;
+  text-decoration:none;
+  border: 0px solid transparent;
 }
 .date_button{
   background: transparent;
-	outline: none;
-	text-decoration:none;
-	border: 0px solid transparent;
+  outline: none;
+  text-decoration:none;
+  border: 0px solid transparent;
   color: grey;
 }
 .scroll {

@@ -48,11 +48,11 @@
   flex: 1 1 auto;
 }
 .button_save{
-	user-select: none;
+  user-select: none;
   text-align: center;
-	outline: none;
-	text-decoration:none;
-	border: 0px solid transparent;
+  outline: none;
+  text-decoration:none;
+  border: 0px solid transparent;
   background: #2298f2;
   color: white;
   padding: 10px;
@@ -61,11 +61,11 @@
   margin: 5px;
 }
 .button_delete{
-	user-select: none;
+  user-select: none;
   text-align: center;
-	outline: none;
-	text-decoration:none;
-	border: 0px solid transparent;
+  outline: none;
+  text-decoration:none;
+  border: 0px solid transparent;
   background: #ebeef0;
   color: grey;
   padding: 10px;
@@ -145,10 +145,10 @@
   }
 }
 .data_input{
-	user-select: none;
-	outline: none;
-	text-decoration:none;
-	border: 0px solid transparent;
+  user-select: none;
+  outline: none;
+  text-decoration:none;
+  border: 0px solid transparent;
   margin: 0;
   padding: 5px;
   flex: 0 0 auto;

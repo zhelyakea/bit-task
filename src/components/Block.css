@@ -55,11 +55,11 @@
   }
 }
 .button_edit{
-	user-select: none;
+  user-select: none;
   text-align: center;
-	outline: none;
-	text-decoration:none;
-	border: 0px solid transparent;
+  outline: none;
+  text-decoration:none;
+  border: 0px solid transparent;
   background: #2298f2;
   color: white;
   padding: 10px;
