@@ -1,0 +1,60 @@
+.col_container{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #ebeef0;
+}
+.block_container{
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+  align-items: center;
+  background: #ebeef0;
+  margin: 15px 0;
+}
+.search_date_div{
+  flex: 1 0 50px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  background: white;
+}
+.search_input{
+	outline: none;
+	text-decoration:none;
+	border: 0px solid transparent;
+}
+.date_button{
+  background: transparent;
+	outline: none;
+	text-decoration:none;
+	border: 0px solid transparent;
+  color: grey;
+}
+.scroll {
+  flex: 1 1 auto;
+  overflow-y: scroll;
+}
+@media (min-width: 1025px){
+  .search_input{
+    padding: 5px;
+    flex: 0 0 auto;
+  }
+  .date_button{
+    padding: 5px;
+    flex: 0 0 auto;
+  }
+}
+@media (max-width: 1024px){
+  .search_input{
+    flex: 0 0 auto;
+    padding: 10px;
+    font-size: 35px;
+  }
+  .date_button{
+    flex: 0 0 auto;
+    padding: 10px;
+    font-size: 35px;
+  }
+}

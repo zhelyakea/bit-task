@@ -1,0 +1,74 @@
+.block_container{
+  flex: 1;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  background: white;
+  margin: 5px;
+}
+.button_div{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+}
+.name_div {
+  flex: 1 1 auto;
+  margin: 5px;
+}
+.image{
+  width: 100%;
+  height: auto;
+}
+.flex_item{
+  flex: 1 0 auto;
+}
+@media (min-width: 1025px){
+  .button_edit{
+    font-size: 15px;
+  }
+  .name{
+    font-size: 20px;
+  }
+  .post{
+    font-size: 15px;
+  }
+  .image_div {
+    width: 100px;
+    margin: 5px;
+  }
+}
+@media (max-width: 1024px){
+  .button_edit{
+    width: 300px;
+    font-size: 35px;
+  }
+  .name{
+    font-size: 45px;
+  }
+  .post{
+    font-size: 35px;
+  }
+  .image_div {
+    width: 200px;
+    margin: 5px;
+  }
+}
+.button_edit{
+	user-select: none;
+  text-align: center;
+	outline: none;
+	text-decoration:none;
+	border: 0px solid transparent;
+  background: #2298f2;
+  color: white;
+  padding: 10px;
+  margin: 5px;
+  align-self: flex-end;
+
+  flex: 0 0 auto;
+}
+.data_input{
+  padding: 5px;
+  flex: 0 0 auto;
+}

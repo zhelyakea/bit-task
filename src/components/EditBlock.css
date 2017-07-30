@@ -1,0 +1,155 @@
+.row_container{
+  flex: 1;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  background: white;
+  margin: 5px;
+}
+.bottom_button_div{
+  flex: 1;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  background: white;
+}
+.col_container{
+  flex: 1;
+  display: flex;
+  flex-direction: column;;
+  flex-wrap: nowrap;
+  align-content: space-around;
+  align-items: stretch;
+}
+.data_input_container{
+  flex: 1;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+}
+.button_div{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+}
+.name_div {
+  flex: 1 1 auto;
+  margin: 5px;
+}
+.flex_item{
+  flex: 0 0 auto;
+}
+.textarea_div{
+  display: flex;
+  background: white;
+}
+.textarea{
+  flex: 1 1 auto;
+}
+.button_save{
+	user-select: none;
+  text-align: center;
+	outline: none;
+	text-decoration:none;
+	border: 0px solid transparent;
+  background: #2298f2;
+  color: white;
+  padding: 10px;
+  font-size: 15px;
+  flex: 0 0 100px;
+  margin: 5px;
+}
+.button_delete{
+	user-select: none;
+  text-align: center;
+	outline: none;
+	text-decoration:none;
+	border: 0px solid transparent;
+  background: #ebeef0;
+  color: grey;
+  padding: 10px;
+  font-size: 15px;
+  flex: 0 0 100px;
+  margin: 5px;
+}
+.image{
+  width: 100%;
+  height: auto;
+}
+@media (min-width: 1025px){
+  .button_edit{
+    width: 300px;
+    font-size: 15px;
+  }
+  .name{
+    font-size: 20px;
+  }
+  .post{
+    font-size: 15px;
+  }
+  .image_div {
+    width: 100px;
+    margin: 5px;
+  }
+  .button_save{
+    padding: 10px;
+    font-size: 15px;
+    flex: 0 0 100px;
+    margin: 5px;
+  }
+  .button_delete{
+    padding: 10px;
+    font-size: 15px;
+    flex: 0 0 100px;
+    margin: 5px;
+  }
+  .textarea{
+    margin: 5px;
+    padding: 5px;
+  }
+  .textarea_div{
+    flex-basis: 10vw;
+  }
+}
+@media (max-width: 1024px){
+  .name{
+    font-size: 45px;
+  }
+  .image_div {
+    width: 200px;
+    margin: 5px;
+  }
+  .button_save {
+    padding: 5px;
+    font-size: 35px;
+    flex: 0 0 250px;
+    margin: 5px;
+  }
+  .button_delete {
+    padding: 5px;
+    font-size: 35px;
+    flex: 0 0 250px;
+    margin: 10px;
+  }
+  .textarea{
+    margin: 10px;
+    padding: 10px;
+    font-size: 25px;
+  }
+  .textarea_div{
+    flex-basis: 30vw;
+  }
+  .data_input{
+    font-size: 35px;
+  }
+}
+.data_input{
+	user-select: none;
+	outline: none;
+	text-decoration:none;
+	border: 0px solid transparent;
+  margin: 0;
+  padding: 5px;
+  flex: 0 0 auto;
+}
