@@ -59,31 +59,31 @@ export default function personalReduce(state = initial, action) {
 			})
 	    return newstate
 
-	case actionTypes.CHANGE_PERSONAL_DATA:
+  	case actionTypes.CHANGE_PERSONAL_DATA:
 
-		let index = action.payload.index
-		let data = action.payload.data
-		Object.keys(data).forEach(key => {
-			newstate.personal[index][key] = data[key]
-		})
-		return newstate
+  		let index = action.payload.index
+  		let data = action.payload.data
+  		Object.keys(data).forEach(key => {
+  			newstate.personal[index][key] = data[key]
+  		})
+  		return newstate
 
-	case actionTypes.DELETE_PERSON:
+  	case actionTypes.DELETE_PERSON:
 
-		newstate.personal.splice(action.payload, 1)
-		newstate.index = {}
-		newstate.search_index = {}
-		newstate.personal.forEach((key, index) => {
-			newstate.index[newstate.personal[index].id] = index
-		})
-		return newstate
+  		newstate.personal.splice(action.payload, 1)
+  		newstate.index = {}
+  		newstate.search_index = {}
+  		newstate.personal.forEach((key, index) => {
+  			newstate.index[newstate.personal[index].id] = index
+  		})
+  		return newstate
 
-	case REHYDRATE:
+  	case REHYDRATE:
 
-	  var incoming = action.payload.myReducer
-	  if (incoming) return {...state, ...incoming, specialKey: processSpecial(incoming.specialKey)}
-  return state
-    default:
-    	return newstate
-	}
+  	  var incoming = action.payload.myReducer
+  	  if (incoming) return {...state, ...incoming, specialKey: processSpecial(incoming.specialKey)}
+    return state
+      default:
+      	return newstate
+  	}
 }

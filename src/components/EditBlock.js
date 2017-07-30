@@ -18,7 +18,7 @@ export default class EditBlock extends Component {
       description: person.description
     }
   }
-	componentWillReceiveProps(nextProps){
+  componentWillReceiveProps(nextProps){
     const { person, post } = nextProps
       this.setState ({
         id: person.id,
@@ -28,7 +28,7 @@ export default class EditBlock extends Component {
         birth_date: person.birth_date,
         description: person.description
       })
-	}
+    }
   changeLastName(event){
     this.setState({
       last_name: event.target.value
@@ -63,11 +63,11 @@ export default class EditBlock extends Component {
   render() {
     const { person, personal, edit, posts, changePersonalData, deleteAndChangeEdit } = this.props
 
-		const personal_list = personal.personal
-		const personal_index = personal.index
+    const personal_list = personal.personal
+    const personal_index = personal.index
 
-		const posts_list = posts.posts
-		const posts_index = posts.index
+    const posts_list = posts.posts
+    const posts_index = posts.index
 
     const id = person.id
     const image = person.image
@@ -92,9 +92,9 @@ export default class EditBlock extends Component {
       data: dataToSaveChanges,
     }
     return (
-  		<div className={styles.col_container}>
+      <div className={styles.col_container}>
 
-    		<div className={styles.row_container}>
+      <div className={styles.row_container}>
 
           <div className={styles.image_div}>
             <img className={styles.image} src={image} />
@@ -102,15 +102,15 @@ export default class EditBlock extends Component {
 
           <div className={styles.data_input_container}>
 
-        		<input className={styles.data_input}
+          <input className={styles.data_input}
               onChange={::this.changeLastName}
               value={this.state.last_name} />
 
-        		<input className={styles.data_input}
+              <input className={styles.data_input}
               onChange={::this.changeFirstName}
               value={this.state.first_name} />
 
-        		<input type="date" className={styles.data_input}
+              <input type="date" className={styles.data_input}
               value={this.state.birth_date.split('T')[0]}
               onChange={::this.changeBirthDate} />
 
@@ -124,27 +124,26 @@ export default class EditBlock extends Component {
               />
             </div>
           </div>
+        </div>
 
-  		</div>
+        <div className={styles.textarea_div}>
+          <textarea
+            onChange={::this.changeDescription}
+            className={styles.textarea} value={this.state.description} />
+        </div>
 
-      <div className={styles.textarea_div}>
-    		<textarea
-          onChange={::this.changeDescription}
-          className={styles.textarea} value={this.state.description} />
-  		</div>
+        <div className={styles.bottom_button_div}>
+          <button
+            className={styles.button_save}
+            onClick={() => changePersonalData(toSaveChanges)}
+          >Сохранить</button>
 
-      <div className={styles.bottom_button_div}>
-    		<button
-          className={styles.button_save}
-          onClick={() => changePersonalData(toSaveChanges)}
-        >Сохранить</button>
-
-    		<button
-          className={styles.button_delete}
-          onClick={() => deleteAndChangeEdit(edit)}
-        >Удалить</button>
-  		</div>
-		</div>
-  	)
+          <button
+            className={styles.button_delete}
+            onClick={() => deleteAndChangeEdit(edit)}
+          >Удалить</button>
+        </div>
+      </div>
+    )
   }
 }
