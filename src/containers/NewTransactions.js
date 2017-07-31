@@ -1,11 +1,13 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as dataAction from '../actions/DataAction'
-import * as actions from '../actions'
-const { map, reduce } = Array.prototype
-import Transaction from '../components/Transaction'
+
+import * as newTrnsActions from '../actions/NewTrnsActions'
+import * as routeActions from '../actions/RouteActions'
+
 import {mathRandom} from '../services/mathrandom'
+
+import Transaction from '../components/Transaction'
 import Select from 'react-select';
 import '!style-loader!css-loader!react-select/dist/react-select.css';
 
@@ -28,25 +30,36 @@ export class NewTransactions extends Component {
     })
   }
   addTrns(){
-    const { addTransaction } = this.props.dataAction
+    const { addTransaction } = this.props.newTrnsActions
     const transactionToSave = {
       id: mathRandom(1, 50),
       bankId: this.state.bank_id,
       amount: this.state.amount
     }
     addTransaction(transactionToSave)
+    this.setState({
+      amount: ''
+    })
+  }
+  componentDidMount(){
+    const { getBanks } = this.props.newTrnsActions
+    const { toBack } = this.props.routeActions
+    const { auth } = this.props
+    auth ? getBanks() : toBack()
   }
   render() {
     const { banks } = this.props
-    const { toBack, addTransaction, toListTransaction } = this.props.dataAction
+    const { addTransaction } = this.props.newTrnsActions
+    const { toBack, setRoute } = this.props.routeActions
     const options = []
-    banks.forEach((key, index) => {
+    const bank_list = banks.list
+    bank_list.forEach((key, index) => {
       options[index] = {}
-      options[index].value = banks[index].name
-      options[index].label = banks[index].name
-      options[index].id = banks[index].id
+      options[index].value = bank_list[index].name
+      options[index].label = bank_list[index].name
+      options[index].id = bank_list[index].id
     })
-    const selected_bank_name = banks.length ? banks.filter((key, index) => banks[index].id === this.state.bank_id)[0].name : null
+    const selected_bank_name = bank_list.length ? bank_list[ banks.index[this.state.bank_id]].name : null
 	return (
     <div className="col_container">
       <h1 className="flex_item">Новая транзакция</h1>
@@ -58,12 +71,12 @@ export class NewTransactions extends Component {
             options={options}
             onChange={::this.setBank}/>
 
-          <input onChange={::this.setAmount} className="input_bank" placeholder="Сумма" />
+          <input onChange={::this.setAmount} className="input_bank" placeholder="Сумма" value={this.state.amount} />
           <button className="button_bank pressed green" onClick={::this.addTrns}>Добавить</button>
         </div>
         <div className="row_container margin_20">
           <button className="button width_225 pressed green" onClick={() => toBack()}>Выйти</button>
-          <button className="button width_225 pressed green" onClick={() => toListTransaction()}>К списку транзакций</button>
+          <button className="button width_225 pressed green" onClick={() => setRoute('/transactions')}>К списку транзакций</button>
         </div>
     </div>
     )
@@ -72,17 +85,19 @@ export class NewTransactions extends Component {
 NewTransactions.propTypes = {
   banks: PropTypes.array.banks,
   transactions: PropTypes.array.transactions,
+  auth: PropTypes.bool.auth
 }
 function mapStateToProps (state) {
   return {
     banks: state.banks,
     transactions: state.transactions,
+    auth: state.auth
   }
 }
 function mapDispatchToProps(dispatch) {
   return {
-		actions: bindActionCreators(actions, dispatch),
-    dataAction: bindActionCreators(dataAction, dispatch)
+    newTrnsActions: bindActionCreators(newTrnsActions, dispatch),
+    routeActions: bindActionCreators(routeActions, dispatch)
   }
 }
 

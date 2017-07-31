@@ -1,9 +1,8 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as dataAction from '../actions/DataAction'
-import * as actions from '../actions'
-const { map, reduce } = Array.prototype
+
+import * as authActions from '../actions/AuthActions'
 
 export class Auth extends Component {
   constructor(props){
@@ -15,7 +14,7 @@ export class Auth extends Component {
     }
   }
   checkAuth(){
-    const { getAuth } = this.props.dataAction
+    const { getAuth } = this.props.authActions
     if(this.state.login.length === 0 || this.state.pass.length === 0){
       this.setState({
         error: true
@@ -75,8 +74,7 @@ function mapStateToProps (state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-		actions: bindActionCreators(actions, dispatch),
-    dataAction: bindActionCreators(dataAction, dispatch),
+    authActions: bindActionCreators(authActions, dispatch),
   }
 }
 

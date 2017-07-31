@@ -1,28 +1,38 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as dataAction from '../actions/DataAction'
-import * as actions from '../actions'
-const { map, reduce } = Array.prototype
-import Transaction from '../components/Transaction'
+
+import * as trnsActions from '../actions/TrnsActions'
+import * as routeActions from '../actions/RouteActions'
+
 import {mathRandom} from '../services/mathrandom'
+
+import Transaction from '../components/Transaction'
 import Select from 'react-select';
 import '!style-loader!css-loader!react-select/dist/react-select.css';
 
 export class Transactions extends Component {
   componentDidMount(){
-    const { getBanks } = this.props.dataAction
-    const { transactions } = this.props
-    if(transactions.length === 0) getBanks()
+    const { getTransactions } = this.props.trnsActions
+    const { toBack } = this.props.routeActions
+    const { transactions, auth } = this.props
+    switch(auth){
+      case true:
+        getTransactions()
+        break
+      default:
+        toBack()
+    }
   }
   render() {
-    const { transactions, banks, editable } = this.props
-    const { toBack, deleteTransaction, toNewTransactioins } = this.props.dataAction
-    const transaction_container = transactions::map((key, index) =>
+    const { transactions, banks } = this.props
+    const { deleteTransaction } = this.props.trnsActions
+    const { toBack, setRoute } = this.props.routeActions
+    
+    const transaction_container = transactions.map((key, index) =>
     <Transaction
       key={transactions[index].id}
       banks={banks}
-      editable={editable}
       deleteTransaction={deleteTransaction}
       transaction={transactions[index]} />
     )
@@ -40,28 +50,28 @@ export class Transactions extends Component {
         </div>
         <div className="row_container margin_20">
           <button className="button width_225 pressed green" onClick={() => toBack()}>Выйти</button>
-          <button className="button width_225 pressed green" onClick={() => toNewTransactioins()} >Новая транзакция</button>
+          <button className="button width_225 pressed green" onClick={() => setRoute('/newtransactions')} >Новая транзакция</button>
         </div>
     </div>
     )
   }
 }
 Transactions.propTypes = {
-  banks: PropTypes.array.banks,
+  banks: PropTypes.object.banks,
   transactions: PropTypes.array.transactions,
-  editable: PropTypes.number.editable
+  auth: PropTypes.bool.auth,
 }
 function mapStateToProps (state) {
   return {
     transactions: state.transactions,
     banks: state.banks,
-    editable: state.editable
+    auth: state.auth,
   }
 }
 function mapDispatchToProps(dispatch) {
   return {
-		actions: bindActionCreators(actions, dispatch),
-    dataAction: bindActionCreators(dataAction, dispatch)
+    trnsActions: bindActionCreators(trnsActions, dispatch),
+    routeActions: bindActionCreators(routeActions, dispatch)
   }
 }
 
