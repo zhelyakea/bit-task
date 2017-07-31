@@ -17,60 +17,39 @@ export function getDataFailure() {
     type: actionTypes.FETCHING_DATA_FAILURE
   }
 }
-export function updatePersonal(personal) {
+export function authentification(state) {
   return {
-    type: actionTypes.UPDATE_PERSONAL,
-    payload: personal
+    type: actionTypes.SET_AUTH,
+    payload: state
   }
 }
-export function updatePosts(posts) {
+export function updateBanks(banks) {
   return {
-    type: actionTypes.UPDATE_POSTS,
-    payload: posts
+    type: actionTypes.UPDATE_BANKS,
+    payload: banks
   }
 }
-export function setEditPerson(index) {
-  return  {
-    type: actionTypes.SET_EDIT_PERSON,
-    payload: index
-  }
-}
-export function changePersonalData(data) {
+export function setEditTransactions(id) {
   return {
-    type: actionTypes.CHANGE_PERSONAL_DATA,
-    payload: data
+    type: actionTypes.SET_EDIT_TRANSACTIONS,
+    payload: id
   }
 }
-export function searchPersonal(data) {
+export function updateTransactions(transactions) {
   return {
-    type: actionTypes.SEARCH_PERSONAL,
-    payload: data
+    type: actionTypes.UPDATE_TRANSACTIONS,
+    payload: transactions
   }
 }
-export function sortByDate() {
-  return (dispatch, getState) => {
-    const personal = getState().personal
-    dispatch(sort(personal))
-    dispatch( setEditPerson(0))
-  }
-}
-
-export function sort(personal) {
+export function add_transaction(transactions) {
   return {
-    type: actionTypes.SORT_BY_DATE,
-    payload: personal
+    type: actionTypes.ADD_TRANSACTIONS,
+    payload: transactions
   }
 }
-export function deletePerson(index) {
-  return  {
-    type: actionTypes.DELETE_PERSON,
-    payload: index
-  }
-}
-export function deleteAndChangeEdit(index){
-  return (dispatch, getState) => {
-    dispatch(deletePerson(index))
-    dispatch(searchPersonal([]))
-    dispatch(setEditPerson(0))
+export function delete_transaction(transaction) {
+  return {
+    type: actionTypes.DELETE_TRANSACTIONS,
+    payload: transaction
   }
 }

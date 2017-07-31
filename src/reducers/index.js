@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux';
-import personal from './personal'
-import posts from './posts'
-import edit from './edit'
+import transactions from './transactions'
+import banks from './banks'
+import auth from './auth'
+import editable from './editable'
 
 export default combineReducers({
-  personal,
-  posts,
-  edit,
+  transactions,
+  banks,
+  auth,
+  editable,
   routing: routerReducer
 })

@@ -1,51 +1,55 @@
 var path = require('path')
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var autoprefixer = require('autoprefixer')
 var webpack = require('webpack')
 
 const config = {
   devtool: 'cheap-module-source-map',
   entry: [
     'babel-polyfill',
-      './src/index'
+      './src/index', './css/style.scss'
   ],
   watch: true,
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/static/'
+    publicPath: '/'
+  },
+  module: {
+    rules: [
+      {
+       test: /\.(js|jsx)$/,
+       include: [
+         path.resolve(__dirname, "src"),
+       ],
+       exclude: /node_modules/,
+       use: [
+         'babel-loader'
+       ]
+     },
+     {
+        test: /\.scss$/,
+        loader: ExtractTextPlugin.extract({
+            fallbackLoader: "style-loader",
+            loader: "css-loader!sass-loader!postcss-loader",
+        }),
+    }]
   },
   plugins: [
+    new ExtractTextPlugin("style.css"),
+    new webpack.LoaderOptionsPlugin({
+        minimize: true,
+        options: {
+            postcss: [autoprefixer]
+        }
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production')
       }
     }),
-  ],
-  module: {
-   rules: [
-     {
-      test: /\.(js|jsx)$/,
-      include: [
-        path.resolve(__dirname, "src"),
-      ],
-      exclude: /node_modules/,
-      use: [
-        'babel-loader'
-      ]
-    },
-    {
-      test: /\.css$/,
-      use: [
-         {
-           loader: "style-loader"
-         },
-         {
-           loader: "css-loader?modules&importLoaders=1&localIdentName=[name]__[local]"
-         }
-        ]
-      }
-    ]
-  }
+  ]
 }
 if (process.env.NODE_ENV === 'production') {
   config.plugins.push(

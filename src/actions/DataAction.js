@@ -1,52 +1,81 @@
+import { hashHistory } from 'react-router'
 import { fetch_post } from '../services/fetch'
 
 import * as actions from './'
 
-export function personalSearch(text) {
-  return (dispatch, getState) => {
+import { banks } from '../data/banks'
+import { transactions } from '../data/transactions'
+
+export function getAuth(query) {
+  return (dispatch) => {
     dispatch(actions.getData())
-    fetch_post(`http://avengers.view.indev-group.eu/test_api/staff/?query=${text}`)
+    fetch_post(`http://httpbin.org/ip`)
       .then((data) => {
         dispatch(actions.getDataSuccess())
-        dispatch(actions.searchPersonal(data))
-        if(Object.values(getState().personal.search_index).length > 0) {
-          const index = Object.values(getState().personal.search_index)[0]
-          console.log(index)
-          dispatch(actions.setEditPerson(index))
+        if(data.hasOwnProperty('origin')){
+          dispatch(actions.authentification(true))
+          hashHistory.push('/transactions')
         }
       })
       .catch(function(err) {
       })
   }
 }
-
-export function personal_fetch(query) {
-  return (dispatch, getState) => {
+export function getBanks() {
+  return (dispatch) => {
     dispatch(actions.getData())
-    switch(query){
-      case 'posts':
-        fetch_post('http://avengers.view.indev-group.eu/test_api/posts/')
+    fetch_post(`http://httpbin.org/ip`)
+      .then((data) => {
+        dispatch(actions.getDataSuccess())
+        if(data.hasOwnProperty('origin')){
+          dispatch(actions.updateBanks(banks))
+        }
+      })
+      .then((data) => {
+        dispatch(actions.getData())
+        fetch_post(`http://httpbin.org/ip`)
           .then((data) => {
             dispatch(actions.getDataSuccess())
-            dispatch(actions.updatePosts(data))
-          })
-          .then((data) => {
-            dispatch(personal_fetch('staff'))
-          })
-          .catch(function(err) {
-          })
-        break
-      case 'staff':
-        fetch_post('http://avengers.view.indev-group.eu/test_api/staff/')
-          .then((data) => {
-            dispatch(actions.getDataSuccess())
-            dispatch(actions.updatePersonal(data))
-            const index = Object.values(getState().personal.index)[0]
-            dispatch(actions.setEditPerson(index))
+            if(data.hasOwnProperty('origin')){
+              dispatch(actions.updateTransactions(transactions))
+            }
           })
           .catch(function(err) {
+            dispatch(actions.getDataFailure())
           })
-        break
-    }
+      })
+      .catch(function(err) {
+        dispatch(actions.getDataFailure())
+      })
+  }
+}
+export function toBack() {
+  return (dispatch) => {
+    dispatch(actions.authentification(false))
+    dispatch(actions.setEditTransactions(null))
+    hashHistory.push('/')
+  }
+}
+export function toNewTransactioins() {
+  return (dispatch) => {
+    dispatch(actions.setEditTransactions(null))
+    hashHistory.push('/newtransactions')
+  }
+}
+export function toListTransaction() {
+  return (dispatch) => {
+    hashHistory.push('/transactions')
+  }
+}
+export function addTransaction(transactions) {
+  return (dispatch) => {
+    dispatch(actions.add_transaction(transactions))
+    dispatch(actions.setEditTransactions(transactions.id))
+  }
+}
+export function deleteTransaction(transaction) {
+  return (dispatch) => {
+    dispatch(actions.delete_transaction(transaction))
+    dispatch(actions.setEditTransactions(null))
   }
 }

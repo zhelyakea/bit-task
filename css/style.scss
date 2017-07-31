@@ -1,0 +1,102 @@
+body {
+  background: #BDBDBD;
+	font-family: Geneva, Arial, Helvetica, sans-serif;
+	user-select: none;
+  text-align: center;
+  font-size: 15px;
+
+    h1 {
+        color: white;
+    }
+    input, button{
+      text-align: center;
+      outline: none;
+      vertical-align: middle;
+      text-decoration:none;
+      border: 0px solid transparent;
+      font-size: 15px;
+    }
+    input{
+      border: transparent 1px solid;
+    }
+}
+.col_container{
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
+.row_container{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+}
+.align_center{
+  align-self: center;
+}
+.field{
+  background: white;
+  margin: 2px;
+  padding: 5px;
+  flex: 0 0 100px;
+}
+.header{
+  background: #E0E0E0;
+  margin: 2px;
+  padding: 5px;
+  flex: 0 0 100px;
+}
+.flex_item{
+  flex: 0 0 auto;
+  align-self: center;
+}
+.input_auth{
+  width: 200px;
+  margin: 2px;
+  padding: 5px 0;
+  font-weight: bold;
+}
+.button{
+  font-weight: bold;
+  flex: 0 0 auto;
+  color: white;
+  width: 200px;
+  padding: 5px 0;
+  margin: 2px;
+  align-self: center;
+}
+.width_200{
+  width: 200px;
+}
+.width_225{
+  width: 225px;
+}
+.input_bank{
+  margin: 0 2px;
+  padding: 0;
+  width: 165px;
+}
+.button_bank{
+  color: white;
+  margin: 2px;
+  padding: 5px;
+  font-weight: bold;
+  width: 110px;
+}
+.margin_10{
+  margin: 10px 0;
+}
+.margin_20{
+  margin: 20px;
+}
+.green{
+  background: #4DB6AC;
+}
+.red{
+  background: #FF8A80;
+}
+.border_red{
+  border: #FF8A80 1px solid;
+}
+.pressed:active{
+  box-shadow: 0 2px 10px #9E9E9E;
+}
