@@ -4,7 +4,7 @@ import * as authActions from './AuthActions'
 
 export function toBack() {
   return (dispatch) => {
-    dispatch(authActions.authentification(false))
+    dispatch(authActions.authentification('', '', false))
     dispatch(setRoute('/'))
   }
 }

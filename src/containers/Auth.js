@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
@@ -8,10 +9,17 @@ export class Auth extends Component {
   constructor(props){
     super(props)
     this.state = {
-      login: '',
-      pass: '',
+      login: this.props.auth.login,
+      pass: this.props.auth.pass,
       error: false
     }
+  }
+  componentWillReceiveProps(nextProps){
+    console.log(nextProps)
+    this.setState({
+      login: nextProps.auth.login,
+      pass: nextProps.auth.pass
+    })
   }
   checkAuth(){
     const { getAuth } = this.props.authActions
@@ -19,7 +27,7 @@ export class Auth extends Component {
       this.setState({
         error: true
       })
-    } else { getAuth(`login=${this.state.login}&pass=${this.state.pass}`) }
+    } else { getAuth(this.state.login, this.state.pass) }
   }
   inputLogin(event){
     this.setState({
@@ -52,6 +60,7 @@ export class Auth extends Component {
           placeholder="Login" />
 
         <input
+          type="password"
           value={this.state.pass}
           onChange={::this.inputPass}
           onKeyPress={::this.loginByKeyPress}
@@ -66,11 +75,10 @@ export class Auth extends Component {
       )
     }
 }
-Auth.propTypes = {
-  personal: PropTypes.object.isRequired
-}
 function mapStateToProps (state) {
-  return {}
+  return {
+    auth: state.auth
+  }
 }
 function mapDispatchToProps(dispatch) {
   return {

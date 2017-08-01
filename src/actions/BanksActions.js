@@ -3,19 +3,17 @@ import { fetch_post } from '../services/fetch'
 import * as actionTypes from '../constants/actionTypes';
 
 import * as fetchActions from './FetchActioins'
-import * as routeActions from './RouteActions'
 
+import { banks } from '../data/banks'
 
-export function getAuth(login, pass) {
+export function getBanks() {
   return (dispatch) => {
     dispatch(fetchActions.getData())
     fetch_post(`http://httpbin.org/ip`)
       .then((data) => {
         dispatch(fetchActions.getDataSuccess())
         if(data.hasOwnProperty('origin')){
-          console.log(login, pass, true)
-          dispatch(authentification(login, pass, true))
-          dispatch(routeActions.setRoute('/newtransactions'))
+          dispatch(updateBanks(banks))
         }
       })
       .catch(function(err) {
@@ -23,12 +21,9 @@ export function getAuth(login, pass) {
       })
   }
 }
-export function authentification(login, pass, state) {
-  console.log(login, pass)
+export function updateBanks(banks) {
   return {
-    type: actionTypes.SET_AUTH,
-    state: state,
-    login: login,
-    pass: pass
+    type: actionTypes.UPDATE_BANKS,
+    banks: banks
   }
 }

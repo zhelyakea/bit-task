@@ -1,7 +1,9 @@
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
+import * as banksActions from '../actions/BanksActions'
 import * as newTrnsActions from '../actions/NewTrnsActions'
 import * as routeActions from '../actions/RouteActions'
 
@@ -15,7 +17,7 @@ export class NewTransactions extends Component {
   constructor(props){
     super(props)
     this.state = {
-      bank_id: 1,
+      bank_id: '1',
       amount: ''
     }
   }
@@ -42,24 +44,25 @@ export class NewTransactions extends Component {
     })
   }
   componentDidMount(){
-    const { getBanks } = this.props.newTrnsActions
+    const { getBanks } = this.props.banksActions
     const { toBack } = this.props.routeActions
     const { auth } = this.props
-    auth ? getBanks() : toBack()
+    auth.state ? getBanks() : toBack()
   }
   render() {
     const { banks } = this.props
     const { addTransaction } = this.props.newTrnsActions
     const { toBack, setRoute } = this.props.routeActions
     const options = []
-    const bank_list = banks.list
-    bank_list.forEach((key, index) => {
+    const banks_keys = Object.keys(banks)
+    banks_keys.forEach((key, index) => {
       options[index] = {}
-      options[index].value = bank_list[index].name
-      options[index].label = bank_list[index].name
-      options[index].id = bank_list[index].id
+      options[index].value = banks[key].name
+      options[index].label = banks[key].name
+      options[index].id = key
     })
-    const selected_bank_name = bank_list.length ? bank_list[ banks.index[this.state.bank_id]].name : null
+    const selected_bank_name = banks_keys.length ? banks[this.state.bank_id].name : null
+
 	return (
     <div className="col_container">
       <h1 className="flex_item">Новая транзакция</h1>
@@ -69,9 +72,13 @@ export class NewTransactions extends Component {
             name="bank-field"
             value={selected_bank_name}
             options={options}
+            clearable = {false}
             onChange={::this.setBank}/>
 
-          <input onChange={::this.setAmount} className="input_bank" placeholder="Сумма" value={this.state.amount} />
+          <input
+          className="input_bank" placeholder="Сумма"
+          value={this.state.amount}
+          onChange={::this.setAmount} />
           <button className="button_bank pressed green" onClick={::this.addTrns}>Добавить</button>
         </div>
         <div className="row_container margin_20">
@@ -82,11 +89,6 @@ export class NewTransactions extends Component {
     )
   }
 }
-NewTransactions.propTypes = {
-  banks: PropTypes.array.banks,
-  transactions: PropTypes.array.transactions,
-  auth: PropTypes.bool.auth
-}
 function mapStateToProps (state) {
   return {
     banks: state.banks,
@@ -96,6 +98,7 @@ function mapStateToProps (state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
+    banksActions: bindActionCreators(banksActions, dispatch),
     newTrnsActions: bindActionCreators(newTrnsActions, dispatch),
     routeActions: bindActionCreators(routeActions, dispatch)
   }

@@ -1,19 +1,15 @@
-
 import * as actionTypes from '../constants/actionTypes';
+import {REHYDRATE} from 'redux-persist/constants'
 
-const banks = {
-  list: [],
-  index: {}
-}
+const banks = {}
 
-export default function payload(state = banks, action) {
+export default function banksReducer(state = banks, action) {
 	const newstate = {...state}
   switch (action.type) {
     case actionTypes.UPDATE_BANKS:
       const banks = action.banks
       banks.forEach((key, index) => {
-        newstate.list = [...banks]
-        newstate.index[banks[index].id] = index
+        newstate[banks[index].id] = {...banks[index]}
       })
       return newstate
     default:

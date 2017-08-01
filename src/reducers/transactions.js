@@ -1,7 +1,7 @@
-
 import * as actionTypes from '../constants/actionTypes';
+import {REHYDRATE} from 'redux-persist/constants'
 
-export default function reducer(state = [], action) {
+export default function transactionsReducer(state = [], action) {
   const newstate = [...state]
   switch (action.type) {
     case actionTypes.UPDATE_TRANSACTIONS:

@@ -1,7 +1,9 @@
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
+import * as banksActions from '../actions/BanksActions'
 import * as trnsActions from '../actions/TrnsActions'
 import * as routeActions from '../actions/RouteActions'
 
@@ -14,10 +16,12 @@ import '!style-loader!css-loader!react-select/dist/react-select.css';
 export class Transactions extends Component {
   componentDidMount(){
     const { getTransactions } = this.props.trnsActions
+    const { getBanks } = this.props.banksActions
     const { toBack } = this.props.routeActions
-    const { transactions, auth } = this.props
-    switch(auth){
+    const { transactions, auth, banks } = this.props
+    switch(auth.state){
       case true:
+        if(Object.keys(banks).length === 0) getBanks()
         getTransactions()
         break
       default:
@@ -28,7 +32,7 @@ export class Transactions extends Component {
     const { transactions, banks } = this.props
     const { deleteTransaction } = this.props.trnsActions
     const { toBack, setRoute } = this.props.routeActions
-    
+
     const transaction_container = transactions.map((key, index) =>
     <Transaction
       key={transactions[index].id}
@@ -56,11 +60,6 @@ export class Transactions extends Component {
     )
   }
 }
-Transactions.propTypes = {
-  banks: PropTypes.object.banks,
-  transactions: PropTypes.array.transactions,
-  auth: PropTypes.bool.auth,
-}
 function mapStateToProps (state) {
   return {
     transactions: state.transactions,
@@ -70,6 +69,7 @@ function mapStateToProps (state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
+    banksActions: bindActionCreators(banksActions, dispatch),
     trnsActions: bindActionCreators(trnsActions, dispatch),
     routeActions: bindActionCreators(routeActions, dispatch)
   }

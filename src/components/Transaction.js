@@ -6,7 +6,7 @@ export default class Transaction extends Component {
     const amount = transaction.amount
     const trs_id = transaction.id
     const bank_id = transaction.bankId
-    const bank_name = banks.list[banks.index[bank_id]].name
+    const bank_name = banks[bank_id].name
     return (
       <div className="row_container">
         <p className="field">{trs_id}</p>
