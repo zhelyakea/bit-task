@@ -13,7 +13,6 @@ export function getAuth(login, pass) {
       .then((data) => {
         dispatch(fetchActions.getDataSuccess())
         if(data.hasOwnProperty('origin')){
-          console.log(login, pass, true)
           dispatch(authentification(login, pass, true))
           dispatch(routeActions.setRoute('/newtransactions'))
         }
@@ -24,7 +23,6 @@ export function getAuth(login, pass) {
   }
 }
 export function authentification(login, pass, state) {
-  console.log(login, pass)
   return {
     type: actionTypes.SET_AUTH,
     state: state,
