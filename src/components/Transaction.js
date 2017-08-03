@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
 
 export default class Transaction extends Component {
   render() {
@@ -6,7 +6,7 @@ export default class Transaction extends Component {
     const amount = transaction.amount
     const trs_id = transaction.id
     const bank_id = transaction.bankId
-    const bank_name = banks[bank_id].name
+    const bank_name = banks.size ? banks.get(bank_id).name : null
     return (
       <div className="row_container">
         <p className="field">{trs_id}</p>

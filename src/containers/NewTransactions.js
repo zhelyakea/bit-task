@@ -10,31 +10,31 @@ import * as routeActions from '../actions/RouteActions'
 import {mathRandom} from '../services/mathrandom'
 
 import Transaction from '../components/Transaction'
+import ColContainer from '../components/ColContainer'
+import RowContainer from '../components/RowContainer'
+
 import Select from 'react-select';
 import '!style-loader!css-loader!react-select/dist/react-select.css';
 
 export class NewTransactions extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      bank_id: '1',
-      amount: ''
-    }
+  state = {
+    bank_id: '1',
+    amount: ''
   }
-  setBank(arg) {
+  setBank = (arg) => {
     this.setState({
       bank_id: arg.id
     })
   }
-  setAmount(event) {
+  setAmount = (event) => {
     this.setState({
       amount: event.target.value
     })
   }
-  addTrns(){
+  addTrns = () => {
     const { addTransaction } = this.props.newTrnsActions
     const transactionToSave = {
-      id: mathRandom(1, 50),
+      id: `${this.props.transactions.size + 15}`,
       bankId: this.state.bank_id,
       amount: this.state.amount
     }
@@ -53,39 +53,34 @@ export class NewTransactions extends Component {
     const { banks } = this.props
     const { addTransaction } = this.props.newTrnsActions
     const { toBack, setRoute } = this.props.routeActions
+
     const options = []
-    const banks_keys = Object.keys(banks)
-    banks_keys.forEach((key, index) => {
-      options[index] = {}
-      options[index].value = banks[key].name
-      options[index].label = banks[key].name
-      options[index].id = key
+    banks.forEach((value, key) => {
+      let name = value.name
+      let id = value.id
+      options.push({value: name, label: name, id})
     })
-    const selected_bank_name = banks_keys.length ? banks[this.state.bank_id].name : null
 
+    const selected_bank_name = banks.size > 0 ? banks.get(this.state.bank_id).name : null
+
+    const button_green = "button width_225 pressed green"
 	return (
-    <div className="col_container">
+    <ColContainer>
       <h1 className="flex_item">Новая транзакция</h1>
-        <div className="row_container margin_10">
+      <RowContainer style="margin_10">
 
-          <Select className="input_bank"
-            name="bank-field"
-            value={selected_bank_name}
-            options={options}
-            clearable = {false}
-            onChange={::this.setBank}/>
+          <Select className="input_bank" name="bank-field" value={selected_bank_name} options={options} clearable = {false} onChange={this.setBank} />
 
-          <input
-          className="input_bank" placeholder="Сумма"
-          value={this.state.amount}
-          onChange={::this.setAmount} />
-          <button className="button_bank pressed green" onClick={::this.addTrns}>Добавить</button>
-        </div>
-        <div className="row_container margin_20">
-          <button className="button width_225 pressed green" onClick={() => toBack()}>Выйти</button>
-          <button className="button width_225 pressed green" onClick={() => setRoute('/transactions')}>К списку транзакций</button>
-        </div>
-    </div>
+          <input className="input_bank" placeholder="Сумма" value={this.state.amount} onChange={this.setAmount} />
+
+          <button className="button_bank pressed green" onClick={this.addTrns}>Добавить</button>
+        </RowContainer>
+
+        <RowContainer style="margin_20">
+          <button className={button_green} onClick={() => toBack()} >Выйти</button>
+          <button className={button_green} onClick={() => setRoute('/transactions')} >К списку транзакций</button>
+        </RowContainer>
+    </ColContainer>
     )
   }
 }
