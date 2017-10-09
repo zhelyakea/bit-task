@@ -1,26 +1,25 @@
-import { fetch_post } from '../services/fetch'
+import { fetch_post } from "../services/fetch";
 
-import * as actionTypes from '../constants/actionTypes';
+import * as actionTypes from "../constants/actionTypes";
 
-import * as fetchActions from './FetchActioins'
-import * as routeActions from './RouteActions'
-
+import { getData, getDataSuccess, getDataFailure } from "./FetchActioins";
+import { setRoute } from "./RouteActions";
 
 export function getAuth(login, pass) {
-  return (dispatch) => {
-    dispatch(fetchActions.getData())
+  return dispatch => {
+    dispatch(getData());
     fetch_post(`http://httpbin.org/ip`)
-      .then((data) => {
-        dispatch(fetchActions.getDataSuccess())
-        if(data.hasOwnProperty('origin')){
-          dispatch(authentification(login, pass, true))
-          dispatch(routeActions.setRoute('/newtransactions'))
+      .then(data => {
+        dispatch(getDataSuccess());
+        if (data.hasOwnProperty("origin")) {
+          dispatch(authentification(login, pass, true));
+          dispatch(setRoute("/newtransactions"));
         }
       })
       .catch(function(err) {
-        dispatch(fetchActions.getDataFailure())
-      })
-  }
+        dispatch(getDataFailure());
+      });
+  };
 }
 export function authentification(login, pass, state) {
   return {
@@ -28,5 +27,5 @@ export function authentification(login, pass, state) {
     state: state,
     login: login,
     pass: pass
-  }
+  };
 }

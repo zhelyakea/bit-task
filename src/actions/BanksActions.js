@@ -2,22 +2,22 @@ import { fetch_post } from '../services/fetch'
 
 import * as actionTypes from '../constants/actionTypes';
 
-import * as fetchActions from './FetchActioins'
+import { getData, getDataSuccess, getDataFailure } from './FetchActioins'
 
 import { banks } from '../data/banks'
 
 export function getBanks() {
   return (dispatch) => {
-    dispatch(fetchActions.getData())
+    dispatch(getData())
     fetch_post(`http://httpbin.org/ip`)
       .then((data) => {
-        dispatch(fetchActions.getDataSuccess())
+        dispatch(getDataSuccess())
         if(data.hasOwnProperty('origin')){
           dispatch(updateBanks(banks))
         }
       })
       .catch(function(err) {
-        dispatch(fetchActions.getDataFailure())
+        dispatch(getDataFailure())
       })
   }
 }

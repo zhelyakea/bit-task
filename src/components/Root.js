@@ -1,14 +1,10 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 export default class Root extends Component {
   render() {
-    const { children } = this.props
-    return (
-      <div>
-      {children}
-      </div>
-    )
+    const { children } = this.props;
+    return <div>{children}</div>;
   }
 }
