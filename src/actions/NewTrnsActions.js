@@ -10,12 +10,10 @@ import { transactions } from '../data/transactions'
 import { updateBanks } from './BanksActions'
 import { updateTransactions } from './TrnsActions'
 
-export function addTransaction(transaction) {
-  return {
-    type: actionTypes.ADD_TRANSACTIONS,
-    transaction: transaction
-  }
-}
+export const addTransaction = transaction => ({
+  type: actionTypes.ADD_TRANSACTIONS,
+  transaction
+})
 export function getTransactionsData(){
   return (dispatch) => {
     dispatch(fetchActions.getData())

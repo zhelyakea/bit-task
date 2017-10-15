@@ -21,11 +21,9 @@ export function getAuth(login, pass) {
       });
   };
 }
-export function authentification(login, pass, state) {
-  return {
-    type: actionTypes.SET_AUTH,
-    state: state,
-    login: login,
-    pass: pass
-  };
-}
+export const authentification = (login, pass, state)  => ({
+  type: actionTypes.SET_AUTH,
+  state,
+  login,
+  pass
+})

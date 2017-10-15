@@ -21,9 +21,7 @@ export function getBanks() {
       })
   }
 }
-export function updateBanks(banks) {
-  return {
-    type: actionTypes.UPDATE_BANKS,
-    banks: banks
-  }
-}
+export const updateBanks = banks => ({
+  type: actionTypes.UPDATE_BANKS,
+  banks
+})

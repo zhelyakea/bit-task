@@ -1,17 +1,11 @@
 import * as actionTypes from "../constants/actionTypes";
 
-export function getData() {
-  return {
-    type: actionTypes.FETCHING_DATA
-  };
-}
-export function getDataSuccess() {
-  return {
-    type: actionTypes.FETCHING_DATA_SUCCESS
-  };
-}
-export function getDataFailure() {
-  return {
-    type: actionTypes.FETCHING_DATA_FAILURE
-  };
-}
+export const getData = () => ({
+  type: actionTypes.FETCHING_DATA
+})
+export const getDataSuccess = () => ({
+  type: actionTypes.FETCHING_DATA_SUCCESS
+})
+export const getDataFailure = () => ({
+  type: actionTypes.FETCHING_DATA_FAILURE
+})

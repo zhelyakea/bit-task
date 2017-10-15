@@ -20,15 +20,11 @@ export function getTransactions() {
       });
   };
 }
-export function updateTransactions(transactions) {
-  return {
-    type: actionTypes.UPDATE_TRANSACTIONS,
-    transactions: transactions
-  };
-}
-export function deleteTransaction(transaction) {
-  return {
-    type: actionTypes.DELETE_TRANSACTIONS,
-    transaction: transaction
-  };
-}
+export const updateTransactions = transactions => ({
+  type: actionTypes.UPDATE_TRANSACTIONS,
+  transactions
+})
+export const deleteTransaction = transaction => ({
+  type: actionTypes.DELETE_TRANSACTIONS,
+  transaction
+})
