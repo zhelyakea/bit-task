@@ -11,9 +11,6 @@ import ColContainer from "../components/ColContainer";
 import RowContainer from "../components/RowContainer";
 import Header from "../components/Header";
 
-import Select from "react-select";
-import "!style-loader!css-loader!react-select/dist/react-select.css";
-
 export class Transactions extends Component {
   componentDidMount() {
     const { getTransactionsData, toBack, transactions, auth, banks } = this.props;
@@ -26,7 +23,7 @@ export class Transactions extends Component {
     }
   }
   render() {
-    const { getTransactionsData, toBack, transactions, auth, banks } = this.props;
+    const { transactions, banks, deleteTransaction, toBack, setRoute } = this.props;
 
     const transaction_container = [];
 
