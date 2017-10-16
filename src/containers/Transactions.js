@@ -27,9 +27,7 @@ export class Transactions extends Component {
     }
   }
   render() {
-    const { transactions, banks } = this.props;
-    const { deleteTransaction } = this.props;
-    const { toBack, setRoute } = this.props;
+    const { getTransactionsData, toBack, transactions, auth, banks } = this.props;
 
     const transaction_container = [];
 
