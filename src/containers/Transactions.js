@@ -17,9 +17,7 @@ import "!style-loader!css-loader!react-select/dist/react-select.css";
 
 export class Transactions extends Component {
   componentDidMount() {
-    const { getTransactionsData } = this.props;
-    const { toBack } = this.props;
-    const { transactions, auth, banks } = this.props;
+    const { getTransactionsData, toBack, transactions, auth, banks } = this.props;
     switch (auth.state) {
       case true:
         getTransactionsData();

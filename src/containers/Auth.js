@@ -54,7 +54,6 @@ export class Auth extends Component {
     return (
       <ColContainer>
         <Header text="Авторизация" />
-
         <input
           value={this.state.login}
           onChange={this.inputLogin}
@@ -62,7 +61,6 @@ export class Auth extends Component {
           className={input_class}
           placeholder="Login"
         />
-
         <input
           type="password"
           value={this.state.pass}
@@ -71,7 +69,6 @@ export class Auth extends Component {
           className={input_class}
           placeholder="Password"
         />
-
         <button
           className={`button width_200 pressed green margin_20`}
           onClick={this.checkAuth}
